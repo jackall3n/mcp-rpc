@@ -1,6 +1,6 @@
 {
   "name": "mcp-rpc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Type-safe RPC library for building Model Context Protocol (MCP) servers",
   "type": "module",
   "files": [
@@ -52,9 +52,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.1",
-    "@repo/typescript-config": "workspace:^",
-    "zod": "^4.0.14"
+    "@modelcontextprotocol/sdk": "^1.17.1"
   },
   "peerDependencies": {
     "zod": "^3.0.0 || ^4.0.0"

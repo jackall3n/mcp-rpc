@@ -27,11 +27,8 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: ^1.17.1
         version: 1.17.1
-      '@repo/typescript-config':
-        specifier: workspace:^
-        version: link:../typescript-config
       zod:
-        specifier: ^4.0.14
+        specifier: ^3.0.0 || ^4.0.0
         version: 4.0.14
     devDependencies:
       tsdown:
