@@ -194,6 +194,8 @@ const tool = rpc
 
 ## Integration with MCP Servers
 
+### Standard MCP Server
+
 ```typescript
 import { McpServer } from '@modelcontextprotocol/sdk';
 
@@ -208,6 +210,58 @@ handler.register(server);
 // Start the server
 server.listen();
 ```
+
+### Vercel MCP Adapter
+
+Use the Vercel MCP adapter to deploy your MCP server as a Next.js API route:
+
+```typescript
+// app/api/mcp/[transport]/route.ts
+import { createMcpHandler } from '@vercel/mcp-adapter';
+import { initRPC } from 'mcp-rpc';
+import { z } from 'zod';
+
+// Create your RPC handler
+const rpc = initRPC
+  .context(async ({ authInfo }) => ({
+    // Your context setup
+  }))
+  .create();
+
+const appHandler = rpc.handler({
+  // Your tools
+  echo: rpc
+    .tool('Echo a message')
+    .input(z.object({ message: z.string() }))
+    .handler(async ({ input }) => ({
+      content: [{ type: 'text', text: `Echo: ${input.message}` }],
+    })),
+});
+
+// Create the Vercel handler
+const handler = createMcpHandler(
+  async (server) => {
+    appHandler.register(server);
+  },
+  {
+    capabilities: {
+      tools: appHandler.tools,
+    },
+  },
+  {
+    basePath: '',
+    verboseLogs: process.env.NODE_ENV === 'development',
+    maxDuration: 60,
+  }
+);
+
+// Export for Next.js App Router
+export { handler as GET, handler as POST, handler as DELETE };
+```
+
+Now your MCP server is accessible at:
+- Local: `http://localhost:3000/api/mcp`
+- Production: `https://your-app.vercel.app/api/mcp`
 
 ## TypeScript Support
 
