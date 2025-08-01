@@ -1,11 +1,12 @@
 {
   "name": "mcp-rpc",
   "version": "0.0.0",
-  "private": true,
-  "description": "An MCP RPC library",
+  "description": "Type-safe RPC library for building Model Context Protocol (MCP) servers",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,8 +17,35 @@
   },
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch"
+    "dev": "tsdown --watch",
+    "prepublishOnly": "pnpm build"
   },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "rpc",
+    "typescript",
+    "type-safe",
+    "zod",
+    "schema-validation",
+    "api",
+    "server",
+    "tools"
+  ],
+  "author": {
+    "name": "Jack",
+    "email": "hi@jck.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackall3n/mcp-rpc.git",
+    "directory": "packages/mcp-rpc"
+  },
+  "bugs": {
+    "url": "https://github.com/jackall3n/mcp-rpc/issues"
+  },
+  "homepage": "https://github.com/jackall3n/mcp-rpc#readme",
   "devDependencies": {
     "tsdown": "latest",
     "tsx": "^4.20.3",
@@ -27,5 +55,11 @@
     "@modelcontextprotocol/sdk": "^1.17.1",
     "@repo/typescript-config": "workspace:^",
     "zod": "^4.0.14"
+  },
+  "peerDependencies": {
+    "zod": "^3.0.0 || ^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
